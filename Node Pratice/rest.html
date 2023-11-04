@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Example</title>
+</head>
+<body>
+  <h1>Place Order</h1>
+  <form id="orderForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="token">Token:</label>
+    <input type="text" id="token" name="token" required>
+    <label for="newPassword">New Password:</label>
+    <input type="password" id="newPassword" name="newPassword" required>
+    <button type="submit">Reset Password</button>
+  </form>
+  <script>
+    document.getElementById("orderForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      const order = {
+        email: formData.get("email"),
+        token: formData.get("token"),
+        newPassword: formData.get("newPassword")
+      };
+
+      fetch("http://localhost:3000/reset-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(order)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // Do something with the response data if needed
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+    });
+  </script>
+</body>
+</html>

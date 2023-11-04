@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Example</title>
+</head>
+<body>
+  <!-- <h1>API Example</h1>
+  <form id="customerForm">
+    <input type="text" name="customer_id" placeholder="Name">
+    <input type="email" name="order_date" placeholder="Email">
+    <input type="text" name="address" placeholder="Address">
+    <button type="submit">Submit Customer</button>
+  </form> -->
+  <h1>Place Order</h1>
+  <form id="orderForm">
+    <input type="text" name="customer_id" placeholder="Customer ID">
+    <input type="date" name="order_date">
+    <input type="number" name="total_amount" placeholder="Total Amount">
+    <button type="submit">Place Order</button>
+  </form>
+  <script>
+    // document.getElementById("customerForm").addEventListener("submit", function(event) {
+    //   event.preventDefault();
+
+    //   const formData = new FormData(event.target);
+    //   const customer = {
+    //     name: formData.get("name"),
+    //     email: formData.get("email"),
+    //     address: formData.get("address")
+    //   };
+
+    //   fetch("http://localhost:3000/customers", {
+    //     method: "POST",
+    //     headers: {
+    //       "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify(customer)
+    //   })
+    //   .then(response => response.json())
+    //   .then(data => {
+    //     console.log(data);
+    //   })
+    //   .catch(error => {
+    //     console.error("Error:", error);
+    //   });
+    // });
+
+
+
+
+
+    document.getElementById("orderForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const formData = new FormData(event.target);
+      const order = {
+        customer_id: formData.get("customer_id"),
+        order_date: formData.get("order_date"),
+        total_amount: formData.get("total_amount")
+      };
+
+      fetch("http://localhost:3000/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(order)
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log(data);
+        // Do something with the response data if needed
+      })
+      .catch(error => {
+        console.error("Error:", error);
+      });
+    });
+  </script>
+</body>
+</html>
